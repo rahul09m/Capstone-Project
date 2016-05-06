@@ -11,7 +11,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:text="Name:"
+            android:text="@string/form_name"
             android:id="@+id/nameText" />
 
         <EditText
@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
-            android:text="Number: "
+            android:text="@string/form_number"
             android:id="@+id/numberText" />
 
         <EditText

@@ -45,17 +45,12 @@ public class CardAdapter extends ArrayAdapter<Card> {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.card_item, parent, false);
         }
-        /*TextView cardId = (TextView)convertView.findViewById(R.id.card_id);
-        cardId.setText();*/
 
         TextView cardName = (TextView) convertView.findViewById(R.id.card_name);
         cardName.setText(card.name);
 
         TextView cardNumber = (TextView) convertView.findViewById(R.id.card_number);
         cardNumber.setText(card.number);
-
-       /* TextView cardFormat = (TextView)convertView.findViewById(R.id.card_format);
-        cardFormat.setText(card.format);*/
 
         return convertView;
     }

@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#006064</color>
     <color name="colorAccent">#00E676</color>
     <color name="delete_button">#F44336</color>
+    <color name="black">#000000</color>
 </resources>

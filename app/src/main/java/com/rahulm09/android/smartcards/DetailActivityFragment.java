@@ -40,7 +40,6 @@ public class DetailActivityFragment extends Fragment {
             e.printStackTrace();
         }
 
-
         TextView cardName = (TextView)rootView.findViewById(R.id.card_name) ;
         cardName.setText(myCard.name);
 
@@ -52,6 +51,4 @@ public class DetailActivityFragment extends Fragment {
 
         return rootView;
     }
-
-
 }

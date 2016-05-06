@@ -19,7 +19,7 @@ public class AddCard extends AppCompatActivity{
     private static final String FORMAT = "format";
     EditText editName;
     EditText editNumber;
-    String format;//testing
+    String format;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -47,13 +47,13 @@ public class AddCard extends AppCompatActivity{
             cv.put(CardColumns.NUMBER, numberText);
             cv.put(CardColumns.FORMAT, format);
             getBaseContext().getContentResolver().insert(CardProvider.Cards.CONTENT_URI, cv);
-            Toast.makeText(this, "Success",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.card_add_message,Toast.LENGTH_SHORT).show();
             Intent backToMain = new Intent(this, MainActivity.class);
             backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(backToMain);
 
         }else{
-            Toast.makeText(this, "Missing Fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.savecard_missing_fields, Toast.LENGTH_SHORT).show();
         }
     }
 }

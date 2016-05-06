@@ -43,9 +43,9 @@ public class EditCard extends AppCompatActivity {
 
     public void deleteCard(View view) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditCard.this);
-        alertDialog.setTitle("Confirm Delete...")
-                    .setMessage("Are you sure you want delete this card?")
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(getString(R.string.delete_dialogbox_title))
+                    .setMessage(getString(R.string.delete_dialogbox_message))
+                    .setPositiveButton(getString(R.string.delete_dialogbox_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int which) {
                             getBaseContext().getContentResolver().delete(CardProvider.Cards.withId(myCard.id), null, null);
                             Toast.makeText(getBaseContext(),"Card Deleted" ,Toast.LENGTH_LONG).show();
@@ -54,8 +54,7 @@ public class EditCard extends AppCompatActivity {
                             startActivity(backToMain);
             }
         });
-
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(getString(R.string.delete_dialogbox_no), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
@@ -68,16 +67,16 @@ public class EditCard extends AppCompatActivity {
         String nameText = editName.getText().toString();
         String numberText = editNumber.getText().toString();
         if ((nameText != null && !nameText.isEmpty()) && (numberText != null && !numberText.isEmpty())){
-        ContentValues cv = new ContentValues();
-        cv.put(CardColumns.NAME, nameText);
-        cv.put(CardColumns.NUMBER, numberText);
-        getBaseContext().getContentResolver().update(CardProvider.Cards.withId(myCard.id),cv,null,null);
-            Toast.makeText(getBaseContext(),"Saved" ,Toast.LENGTH_LONG).show();
-            Intent backToMain = new Intent(this, MainActivity.class);
-            backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(backToMain);
-    }else{
-            Toast.makeText(this, "Missing Fields", Toast.LENGTH_SHORT).show();
+            ContentValues cv = new ContentValues();
+            cv.put(CardColumns.NAME, nameText);
+            cv.put(CardColumns.NUMBER, numberText);
+            getBaseContext().getContentResolver().update(CardProvider.Cards.withId(myCard.id),cv,null,null);
+                Toast.makeText(getBaseContext(),"Saved" ,Toast.LENGTH_LONG).show();
+                Intent backToMain = new Intent(this, MainActivity.class);
+                backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(backToMain);
+        }else{
+            Toast.makeText(this, R.string.savecard_missing_fields, Toast.LENGTH_SHORT).show();
         }
     }
 }

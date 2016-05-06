@@ -36,6 +36,8 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     AdView mAdView;
     View rootView;
 
+    public static final String APPWIDGET_UPDATE= "android.appwidget.action.APPWIDGET_UPDATE";
+
     public MainActivityFragment() {
     }
 
@@ -55,7 +57,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         mAdView = (AdView) rootView.findViewById(R.id.adView);
 
@@ -104,7 +106,9 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {}
+    public void onLoaderReset(Loader<Cursor> loader) {
+        getContext().sendBroadcast(new Intent(APPWIDGET_UPDATE));
+    }
 
     private void updateAdapter(List<Card> cardToAdd){
        cardAdapter.clear();

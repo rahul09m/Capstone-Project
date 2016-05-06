@@ -9,4 +9,5 @@
     android:padding="5dp"
     android:onClick="saveCard"
     android:background="@color/colorAccent"
+    android:contentDescription="@string/cd_save_card"
     tools:showIn="@layout/add_card" />
