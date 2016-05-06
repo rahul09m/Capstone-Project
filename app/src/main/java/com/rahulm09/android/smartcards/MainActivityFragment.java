@@ -2,7 +2,9 @@ package com.rahulm09.android.smartcards;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -13,8 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.rahulm09.android.smartcards.data.CardColumns;
 import com.rahulm09.android.smartcards.data.CardProvider;
 
@@ -29,6 +32,10 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     private static final String CARD_KEY = "card" ;
     private ArrayList<Card> cards;
     private CardAdapter cardAdapter;
+    AdRequest adRequest;
+    AdView mAdView;
+    View rootView;
+
     public MainActivityFragment() {
     }
 
@@ -36,11 +43,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         cardAdapter = new CardAdapter(getActivity(), new ArrayList<Card>());
-       // getLoaderManager().restartLoader(CARD_LOADER, null, this);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        new LoadAd().execute();
         getLoaderManager().restartLoader(CARD_LOADER, null, this);
         super.onActivityCreated(savedInstanceState);
     }
@@ -48,7 +55,9 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mAdView = (AdView) rootView.findViewById(R.id.adView);
 
         GridView gridView = (GridView) rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(cardAdapter);
@@ -60,10 +69,12 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                 startActivity(detailIntent);
             }
         });
-
-
-
         return rootView;
+    }
+
+    private void showMessage(String msg) {
+        Snackbar snackbar = Snackbar.make(rootView, msg, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
     @Override
@@ -83,24 +94,39 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
                         cursor.getString(cursor.getColumnIndex(CardColumns.NUMBER)),
                         cursor.getString(cursor.getColumnIndex(CardColumns.FORMAT)));
                 cards.add(card);
-               // Log.d("CursorID", String.valueOf(cursor.getInt(cursor.getColumnIndex(CardColumns._ID))));
-                //Log.d("CursorFormat", String.valueOf(cursor.getString(cursor.getColumnIndex(CardColumns.FORMAT))));
             }
             cursor.close();
             updateAdapter(cards);
         }else{
-            Toast.makeText(getContext(), "No cards",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "No cards",Toast.LENGTH_SHORT).show();
+            showMessage("No Cards");
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
+    public void onLoaderReset(Loader<Cursor> loader) {}
 
     private void updateAdapter(List<Card> cardToAdd){
-        cardAdapter.clear();
+       cardAdapter.clear();
         cardAdapter.addAll(cardToAdd);
         cardAdapter.notifyDataSetChanged();
+    }
+
+    private class LoadAd extends AsyncTask<Void, Void, AdRequest> {
+
+        @Override
+        protected AdRequest doInBackground(Void... params) {
+            adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .build();
+            return adRequest;
+        }
+
+        @Override
+        protected void onPostExecute(AdRequest adRequest) {
+            super.onPostExecute(adRequest);
+            if(adRequest!=null)
+                mAdView.loadAd(adRequest);
+        }
     }
 }

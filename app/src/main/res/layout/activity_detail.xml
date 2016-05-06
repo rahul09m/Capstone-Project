@@ -4,8 +4,7 @@
     android:id="@+id/card_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity"
-    tools:ignore="MergeRootFrame"/>
+    tools:context=".DetailActivity" />
 
 <!--<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

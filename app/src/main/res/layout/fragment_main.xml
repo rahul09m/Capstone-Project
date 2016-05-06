@@ -1,15 +1,45 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!--<GridView android:id="@+id/grid_view"
+    android:numColumns="auto_fit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivityFragment"
+    tools:showIn="@layout/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+</GridView>-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivityFragment"
     tools:showIn="@layout/activity_main">
+    <LinearLayout
+        android:id="@+id/ad_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <include layout="@layout/ad_layout" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/ad_layout" >
     <GridView
         android:id="@+id/grid_view"
-        android:columnWidth="150dp"
         android:numColumns="auto_fit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp">
     </GridView>
+    </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>
+
