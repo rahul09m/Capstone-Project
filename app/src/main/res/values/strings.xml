@@ -27,5 +27,6 @@
     <string name="test_string">TEST</string>
     <string name="add_card_label">Add Card</string>
     <string name="edit_card_label">Edit Card</string>
+    <string name="add_test_card">Add Test Card</string>
 
 </resources>

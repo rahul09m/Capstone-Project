@@ -14,4 +14,10 @@
         android:orderInCategory="100"
         android:title="@string/action_share_app"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_test_card"
+        android:orderInCategory="200"
+        android:title="@string/add_test_card"
+        app:showAsAction="never" />
 </menu>

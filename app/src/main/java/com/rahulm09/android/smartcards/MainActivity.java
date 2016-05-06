@@ -14,7 +14,7 @@ import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class MainActivity extends AppCompatActivity /*implements GoogleApiClient.OnConnectionFailedListener*/ {
+public class MainActivity extends AppCompatActivity {
 
 private static final String CONTENT = "content";
     private static final String FORMAT = "format";
@@ -49,21 +49,21 @@ private static final String CONTENT = "content";
         int id = item.getItemId();
 
         if (id == R.id.action_add) {
-            Intent showScannedCard = new Intent(getApplicationContext(), AddCard.class);
-            showScannedCard.putExtra(CONTENT, "123456789");
-            showScannedCard.putExtra(FORMAT, "CODE_128");
-            startActivity(showScannedCard);
-            /*IntentIntegrator scanCard = new IntentIntegrator((Activity) mContext);
-                    scanCard.initiateScan();*/
-            //return true;
-        }else if (id == R.id.action_share_app){
-            Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
-                    .setMessage(getString(R.string.invitation_message))
-                   // .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
-                    .setCallToActionText(getString(R.string.invitation_cta))
-                    .build();
-            startActivityForResult(intent, REQUEST_INVITE);
-        }
+                    IntentIntegrator scanCard = new IntentIntegrator(this);
+                    scanCard.initiateScan();
+                }else if (id == R.id.action_share_app){
+                    Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                            .setMessage(getString(R.string.invitation_message))
+                           // .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
+                            .setCallToActionText(getString(R.string.invitation_cta))
+                            .build();
+                            startActivityForResult(intent, REQUEST_INVITE);
+                }else if(id == R.id.action_add_test_card){
+                    Intent showScannedCard = new Intent(this, AddCard.class);
+                    showScannedCard.putExtra(CONTENT, "123456789");
+                    showScannedCard.putExtra(FORMAT, "CODE_128");
+                    startActivity(showScannedCard);
+                }
 
         return super.onOptionsItemSelected(item);
     }
@@ -97,7 +97,6 @@ private static final String CONTENT = "content";
 
     private void showMessage(String msg) {
         Snackbar snackbar = Snackbar.make(co, msg, Snackbar.LENGTH_SHORT);
-
         snackbar.show();
     }
 }

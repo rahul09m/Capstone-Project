@@ -2,9 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'udacity'
+            keyPassword 'password'
+            storeFile file('C:/Users/rmenezes/Desktop/SmartCards/keystore.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
-
     defaultConfig {
         applicationId "com.rahulm09.android.smartcards"
         minSdkVersion 15
@@ -16,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
