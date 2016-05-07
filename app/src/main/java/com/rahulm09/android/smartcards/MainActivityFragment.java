@@ -35,7 +35,6 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     AdRequest adRequest;
     AdView mAdView;
     View rootView;
-
     public static final String APPWIDGET_UPDATE= "android.appwidget.action.APPWIDGET_UPDATE";
 
     public MainActivityFragment() {
@@ -101,7 +100,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             updateAdapter(cards);
         }else{
             //Toast.makeText(getContext(), "No cards",Toast.LENGTH_SHORT).show();
-            showMessage("No Cards");
+            showMessage(getString(R.string.no_cards_message));
         }
     }
 

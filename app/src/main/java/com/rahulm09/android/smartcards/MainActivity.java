@@ -32,8 +32,6 @@ private static final String CONTENT = "content";
         setSupportActionBar(toolbar);
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -43,9 +41,6 @@ private static final String CONTENT = "content";
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         if (id == R.id.action_add) {
@@ -58,6 +53,7 @@ private static final String CONTENT = "content";
                             .setCallToActionText(getString(R.string.invitation_cta))
                             .build();
                             startActivityForResult(intent, REQUEST_INVITE);
+            //Adds a test card, without scanning
                 }else if(id == R.id.action_add_test_card){
                     Intent showScannedCard = new Intent(this, AddCard.class);
                     showScannedCard.putExtra(CONTENT, "123456789");
@@ -80,7 +76,7 @@ private static final String CONTENT = "content";
                 Log.d(TAG, getString(R.string.sent_invitations_fmt, ids.length));
             } else {
                 // Sending failed or it was canceled, show failure message to the user
-                showMessage("Share App Cancelled");
+                showMessage(getString(R.string.share_app_cancel_message));
             }
         } else if (requestCode == SCAN_CARD) {
             IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -88,10 +84,8 @@ private static final String CONTENT = "content";
                 Intent showScannedCard = new Intent(this, AddCard.class);
                 showScannedCard.putExtra(CONTENT, scanResult.getContents());
                 showScannedCard.putExtra(FORMAT, scanResult.getFormatName());
-
                 startActivity(showScannedCard);
             }
-
         }
     }
 

@@ -17,9 +17,6 @@ import com.rahulm09.android.smartcards.data.CardProvider;
  * Created by Rahul on 03/05/2016.
  */
 public class EditCard extends AppCompatActivity {
-    private static final String SAVED_CARD_KEY = "saved_card" ;
-    String name;
-    String number;
     Card myCard;
     private static final String CARD_KEY = "card";
     EditText editName;
@@ -48,7 +45,7 @@ public class EditCard extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.delete_dialogbox_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int which) {
                             getBaseContext().getContentResolver().delete(CardProvider.Cards.withId(myCard.id), null, null);
-                            Toast.makeText(getBaseContext(),"Card Deleted" ,Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), R.string.card_delete_message ,Toast.LENGTH_LONG).show();
                             Intent backToMain = new Intent(EditCard.this , MainActivity.class);
                             backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(backToMain);
@@ -71,7 +68,7 @@ public class EditCard extends AppCompatActivity {
             cv.put(CardColumns.NAME, nameText);
             cv.put(CardColumns.NUMBER, numberText);
             getBaseContext().getContentResolver().update(CardProvider.Cards.withId(myCard.id),cv,null,null);
-                Toast.makeText(getBaseContext(),"Saved" ,Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), R.string.card_saved_message ,Toast.LENGTH_LONG).show();
                 Intent backToMain = new Intent(this, MainActivity.class);
                 backToMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(backToMain);

@@ -28,5 +28,11 @@
     <string name="add_card_label">Add Card</string>
     <string name="edit_card_label">Edit Card</string>
     <string name="add_test_card">Add Test Card</string>
+    <string name="share_app_cancel_message">Share App Cancelled</string>
+    <string name="no_cards_message">No Cards</string>
+    <string name="card_saved_message">Saved</string>
+    <string name="card_delete_message">Card Deleted</string>
+    <string name="delete_button">Delete</string>
+    <string name="save_button">Save</string>
 
 </resources>

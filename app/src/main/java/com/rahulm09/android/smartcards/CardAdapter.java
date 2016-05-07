@@ -13,7 +13,6 @@ import java.util.List;
  * Created by rmenezes on 5/2/2016.
  */
 public class CardAdapter extends ArrayAdapter<Card> {
-   // public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     public CardAdapter(Activity context, List<Card> cards) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
