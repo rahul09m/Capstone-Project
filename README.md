@@ -47,3 +47,4 @@ In this project, you will demonstrate the skills you've learned in your Nanodegr
 > - If it performs short duration, on-demand requests (such as search), app uses an AsyncTask.
 
 - App uses a Loader to move its data to its views.
+
